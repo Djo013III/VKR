@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе "Уголок"| Место, где все свои - доставка еды на дом </title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Базовые стили */
+        :root {
+            --primary-color: #8B4513; /* Коричневый из логотипа */
+            --primary-hover: #A0522D; /* Темно-коричневый */
+            --text-color: #333;
+            --light-text: #666;
+            --bg-light: #FFF8F0;
+            --bg-white: #fff;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --logo-brown: #8B4513;
+            --logo-cream: #F5DEB3;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background: url('https://i.ibb.co/x8PgxCB4/image.png') no-repeat center center fixed;
+            background-size: cover;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        /* Слайдер */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            max-height: 500px;
+            min-height: 250px;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 767px) {
+            .slider {
+                height: 40vh;
+                min-height: 200px;
+            }
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 500px;
+        }
+        
+        @media (max-width: 767px) {
+            .slide-content {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                padding: 10px;
+            }
+        }
+        
+        .slide-content h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+        }
+        
+        .slide-content p {
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+        }
+        
+        /* Шапка */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 4vw, 1.75rem);
+            font-weight: 700;
+            margin-bottom: 0;
+            color: var(--logo-cream);
+        }
+        
+        .slogan {
+            font-size: 0.7rem;
+            font-style: italic;
+            margin-top: 2px;
+            color: var(--logo-cream);
+        }
+        
+        nav {
+            width: 100%;
+            order: 3;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        nav.active {
+            display: block;
+        }
+        
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            background-color: var(--primary-hover);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        nav ul li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        nav ul li:last-child {
+            border-bottom: none;
+        }
+        
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            order: 2;
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            order: 1;
+            margin-left: auto;
+        }
+        
+        .header-social {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .header-social a {
+            color: white;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .header-social a:hover {
+            color: #f8d7da;
+        }
+        
+        .cart-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: white;
+        }
+        
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* Основные стили */
+        section {
+            padding: 30px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        @media (max-width: 767px) {
+            section {
+                padding: 20px 0;
+                margin: 10px 0;
+            }
+            
+            .header-icons {
+                gap: 10px;
+            }
+            
+            .header-social {
+                gap: 5px;
+            }
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        /* Акции */
+        .promo-section {
+            background-color: rgba(255, 248, 240, 0.95);
+        }
+        
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        @media (max-width: 767px) {
+            .promo-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .promo-card {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .promo-img {
+            height: 150px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .promo-content {
+            padding: 15px;
+        }
+        
+        .promo-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.7rem;
+            z-index: 1;
+        }
+        
+        .promo-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .promo-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+        
+        .promo-time {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 8px;
+        }
+        
+        .promo-timer {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .promo-unavailable {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .promo-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 6px;
+            font-size: 0.8rem;
+        }
+        
+        /* Набор Random */
+        .random-set {
+            position: relative;
+            background-color: rgba(255, 248, 240, 0.9);
+            border: 2px dashed var(--primary-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .random-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .random-set h3 {
+            color: var(--primary-color);
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .random-set p {
+            margin-bottom: 12px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .random-set .price {
+            font-weight: bold;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+        
+        .random-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 767px) {
+            .random-set {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+        }
+        
+        /* Меню */
+        .menu-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 5px;
+        }
+        
+        @media (max-width: 767px) {
+            .dishes-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+        }
+        
+        .dish-card {
+            background-color: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dish-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        @media (max-width: 767px) {
+            .dish-img {
+                height: 120px;
+            }
+        }
+        
+        .dish-info {
+            padding: 15px;
+        }
+        
+        .dish-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .dish-description {
+            color: var(--light-text);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .dish-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+        
+        .page-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-color);
+            background: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .page-btn:hover:not(.active) {
+            background: rgba(139, 0, 0, 0.1);
+        }
+        
+        /* О нас */
+        .about {
+            background-color: rgba(255, 248, 240, 0.95);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 767px) {
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-block h3 {
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-block p, .contact-block a {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .contact-block a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .contact-block a:hover {
+            text-decoration: underline;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        @media (max-width: 767px) {
+            .map-container {
+                height: 300px;
+            }
+        }
+        
+        /* Корзина */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 350px;
+            height: 100%;
+            background: var(--bg-white);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (max-width: 767px) {
+            .cart-modal {
+                max-width: 100%;
+            }
+        }
+        
+        .cart-modal.active {
+            right: 0;
+        }
+        
+        .cart-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        
+        .close-cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .cart-items {
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.8rem;
+        }
+        
+        .cart-item-name {
+            flex: 1;
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin: 0 8px;
+        }
+        
+        .quantity-controls button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        .quantity-controls span {
+            margin: 0 6px;
+            min-width: 18px;
+            text-align: center;
+        }
+        
+        .cart-item-price {
+            min-width: 50px;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 5px;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            margin: 15px 0;
+            text-align: right;
+            font-size: 1rem;
+        }
+        
+        /* Модальные окна */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-white);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            padding: 15px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        /* Формы */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивные стили */
+        @media (min-width: 768px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            .logo-container {
+                order: 1;
+                margin-bottom: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            nav {
+                display: block;
+                width: auto;
+                order: 2;
+                margin-top: 0;
+                margin-left: auto;
+            }
+            
+            nav ul {
+                flex-direction: row;
+                background: transparent;
+            }
+            
+            nav ul li {
+                border-bottom: none;
+                margin-left: 12px;
+            }
+            
+            nav ul li a {
+                padding: 5px 8px;
+            }
+            
+            .header-icons {
+                order: 3;
+                margin-left: 15px;
+            }
+            
+            .about-content {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .about-text {
+                flex: 1;
+            }
+            
+            .about-image {
+                flex: 1;
+            }
+            
+            .random-set {
+                padding: 30px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .promo-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .dishes-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        } .dish-info {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .dish-info .btn {
+        margin-top: auto;
+        align-self: flex-start;
+        width: 100%;
+    }
+    
+    .dish-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+ /* Обновленные стили для карточек акций */
+    .promo-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .promo-content {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    
+    .promo-content .promo-btn {
+        margin-top: auto;
+        align-self: flex-start;
+        width: 100%;
+    }
+
+/* Обновленные стили для карточек меню */
+.dish-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dish-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    min-height: 2.5em; /* Фиксированная высота для названия (2 строки) */
+}
+
+.dish-description {
+    color: var(--light-text);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    flex-grow: 1; /* Растягивает описание, чтобы цена оставалась внизу */
+}
+
+.dish-price {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left; /* Выравнивание цены по левому краю */
+    padding-right: 10px; /* Отступ от кнопки */
+}
+
+.dish-info .btn {
+    margin-top: auto;
+    align-self: flex-start;
+    width: 100%;
+    margin-top: 0; /* Убираем отступ сверху, т.к. цена теперь в одной строке */
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+}
+
+.dish-card {
+    position: relative; /* Для позиционирования кнопки */
+    padding-bottom: 50px; /* Место для кнопки */
+}
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo">Уголок</div>
+                    <div class="slogan">место, где все свои</div>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#menu">Меню</a></li>
+                        <li><a href="#promo">Акции</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header-icons">
+                    <div class="header-social">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                    <div class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Слайдер -->
+    <div class="slider" id="home">
+<div class="slide active" style="background-image: url('https://i.ibb.co/VcvfVkGc/Kandinsky-3-1-1.jpg');">
+    <div class="slide-content">
+        <h2>Место, где каждый чувствует себя дома</h2>
+        <p>Приходите, или заказывайте у нас! Попробуйте наши лучшие блюда, приготовленные с любовью</p>
+    </div>
+</div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+    <div class="slide-content">
+        <h2>Место, где ждут именно вас </h2>
+        <p>Уникальные предложения и программа лояльности для наших дорогих гостей!</p>
+    </div>
+</div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80');">
+            <div class="slide-content">
+                <h2>Место, где вкусно</h2>
+                <p>Наши специалисты с душой приготовят для вас что угодно, от завтрака, до легкого романтичного ужина</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основное содержимое -->
+    <main>
+        <!-- Акции -->
+        <section class="promo-section" id="promo">
+            <div class="container">
+                <h2 class="section-title">Акции и спецпредложения</h2>
+                <div class="promo-cards">
+                    <div class="promo-card">
+                        <div class="promo-img" style="background-image: url('https://caterme.ru/sites/default/files/Articles/164/caterme.ru_164_01.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="promo-content">
+                            <div class="promo-badge">Акция</div>
+                            <h3>Комплексный обед</h3>
+                            <p>Суп, второе, салат и напиток</p>
+                            <div class="promo-price">299 руб.</div>
+                            <div class="promo-time">Доступно с 12:00 до 16:00</div>
+                            <div class="promo-timer" id="lunch-timer"></div>
+                            <div class="promo-unavailable" id="lunch-unavailable">Ожидайте, скоро предложение будет доступно! ;)</div>
+                            <button class="btn promo-btn" id="lunch-btn">Заказать</button>
+                        </div>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-img" style="background-image: url('https://images.squarespace-cdn.com/content/v1/570f4b07e707ebe730ca8c42/1643209608130-3TJ1PHVECH45OAN5KQGD/_MG_0157.jpg?format=1000w?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="promo-content">
+                            <div class="promo-badge">Скидка 20%</div>
+                            <h3>Семейный ужин</h3>
+                            <p>4 блюда на выбор + десерт в подарок</p>
+                            <div class="promo-price">699 руб.</div>
+                            <div class="promo-time">Доступно с 18:00 до 20:00</div>
+                            <div class="promo-timer" id="dinner-timer"></div>
+                            <div class="promo-unavailable" id="dinner-unavailable">Ожидайте, скоро предложение будет доступно! ;)</div>
+                            <button class="btn promo-btn" id="dinner-btn">Заказать</button>
+                        </div>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-img" style="background-image: url('https://img.goodfon.ru/wallpaper/big/3/82/badfon-kruassany-korzinka-kofe.webp?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="promo-content">
+                            <div class="promo-badge">Новинка</div>
+                            <h3>Завтрак в постель</h3>
+                            <p>Свежая выпечка, горячая закуска и чай или кофе</p>
+                            <div class="promo-price">199 руб.</div>
+                            <div class="promo-time">Доступно с 10:00 до 11:00</div>
+                            <div class="promo-timer" id="breakfast-timer"></div>
+                            <div class="promo-unavailable" id="breakfast-unavailable">Ожидайте, скоро предложение будет доступно! ;)</div>
+                            <button class="btn promo-btn" id="breakfast-btn">Заказать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Набор Random -->
+        <section class="container">
+            <div class="random-set">
+                <div class="random-bg"></div>
+                <h3>Набор Random</h3>
+                <p>Уникальное предложение! Мы собирае для вас комплексный набор! Но что внутри вы узнаете только когда вам привезут</p>
+                <p>Лучший способ попробовать новое и получить сюрприз от нашего шеф-повара! На эту позицию доставка бесплатно независимо от суммы в корзине</p>
+                <div class="price">549 руб.</div>
+                <button class="btn random-btn">Заказать набор</button>
+            </div>
+        </section>
+
+        <!-- Меню -->
+        <section class="popular-dishes" id="menu">
+            <div class="container">
+                <h2 class="section-title">Наше меню</h2>
+                <div class="menu-container">
+                    <div class="dishes-grid">
+                        <!-- Блюда 1-6 -->
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://hoff.ru/upload/medialibrary/41a/0lzdu04gdtiiwq12lj9p14g8lgskxbts.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Салат «Оливье» классический</h3>
+                                <p class="dish-description">Любимая классика семейного застолья!</p>
+                                <span class="dish-price">91 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://fort.crimea.com/catering/uploads/fotos/2273e479-dbcd-11ea-bb1d-bc5ff44a223e_1.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Свекольный салат с чесноком и грецкими орехами</h3>
+                                <p class="dish-description">Охлажденная свекла под майонезом с орешками и пряностями, утоляет голод и придает легкости</p>
+                                <span class="dish-price">84 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://cdn.lifehacker.ru/wp-content/uploads/2019/04/219_1680277278-scaled-e1680277316833-630x315.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Яйца, фаршированные кукурузой и горчицей</h3>
+                                <p class="dish-description">Просто и пикантно, самое то, чтоб начать долгий ужин в кругу друзей или быстро перекусить</p>
+                                <span class="dish-price">104 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://vkusvill.ru/upload/resize/68070/seledka-pod-shuboy-v-vide-zakuski_588x409x90_c.webp?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Канапе «Сельдь под шубой»</h3>
+                                <p class="dish-description">Классика в новом виде! Блюдо, которое обьединяет поколения и людей с хорошим вкусом</p>
+                                <span class="dish-price">44 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://cdn.food.ru/unsigned/fit/640/480/ce/0/czM6Ly9tZWRpYS9waWN0dXJlcy9yZWNpcGVzLzI0MzMvc3RlcHMvRHRTc1d1LkpQRw.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Сырные палочки в слоеном тесте</h3>
+                                <p class="dish-description">Закуска, идеально подходящая как легкий завтрак или прекрасный перекус</p>
+                                <span class="dish-price">116 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://bulkabakery.ru/files/products/23_1654261041.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Мини-пирожки с мясом</h3>
+                                <p class="dish-description">Как у бабушки, попробуйте!</p>
+                                <span class="dish-price">67 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <!-- Блюда 7-12 -->
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://dobryanka-rus.ru/storage/goods/254902_kJu3L.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Мини-пирожки с капустой и яйцом</h3>
+                                <p class="dish-description">Как у бабушки, но без мяса. Тоже стоит попробовать!</p>
+                                <span class="dish-price">41 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://img.iamcook.ru/2020/upl/recipes/cat/u-111f101e80c9c73de15a52ae11eadb4f.JPG?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Картофельные зразы с грибами</h3>
+                                <p class="dish-description">Вкус деревни не выходя из дома. Рекомендуем</p>
+                                <span class="dish-price">109 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://fort.crimea.com/catering/uploads/fotos/dc5dc409-934d-11e9-9c70-54a05051519a_1.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Оладьи из кабачков со сметаной"</h3>
+                                <p class="dish-description">Вкуснейшие оладушки под сметанкой, готовили для вас</p>
+                                <span class="dish-price">129 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://petelinka.ru/storage/images/recipe/origin/1597803455_27756.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Суп-лапша с курицей и овощами</h3>
+                                <p class="dish-description">Свежие овощи и куриное филе томленное с лапшой специально для вас</p>
+                                <span class="dish-price">64 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://tarelkina.com/wp-content/uploads/2012/09/DSC_0007-e1427559968628.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Овощной суп с фрикадельками</h3>
+                                <p class="dish-description">Овощи и фрикадельки из курицы в легком и вкусном бульоне. Обязательно стоит попробовать</p>
+                                <span class="dish-price">101 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://cdnn21.img.ria.ru/images/07e8/09/0b/1972034212_0:160:3072:1888_1920x0_80_0_0_7d86008774f4d38c08d2f59c1e30590a.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Солянка мясная сборная</h3>
+                                <p class="dish-description">Говядина, колбаса, овощи,каперсы, маслины и лимончик, томлённый долгое время, чтоб подарить вам лучший вкус</p>
+                                <span class="dish-price">164 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <!-- Блюда 13-18 -->
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://fort.crimea.com/catering/uploads/fotos/1c31367d-8c1f-11e9-9c70-54a05051519a_1.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Грибной суп-пюре</h3>
+                                <p class="dish-description">Утонченный вкус Франции в вашей тарелке</p>
+                                <span class="dish-price">78 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://kedem.ru/photo/articles/2016/07/kurica-s-kartoshkoj-v-multivarke-04.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Запеченная курица с картофелем и овощами</h3>
+                                <p class="dish-description">Куриное филе и запеченные овощи, фирменное блюдо</p>
+                                <span class="dish-price">92 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://cdn.food.ru/unsigned/fit/640/480/ce/0/czM6Ly9tZWRpYS9waWN0dXJlcy8yMDIzMDQxMi81VzVEYzYuanBlZw.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Рыба «Под шубой» из минтая с перловкой</h3>
+                                <p class="dish-description">Рыбка, овощи и каша. Просто и вкусно</p>
+                                <span class="dish-price">122 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://static.vkusnyblog.com/img3x4/uploads/2023/10/pasta-s-tomatno-slivochnym-sousom.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Паста с томатно-сливочным соусом и куриным филе</h3>
+                                <p class="dish-description">Привет из Италии с нотками курицы</p>
+                                <span class="dish-price">194 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://static.1000.menu/img/content-v2/4c/c4/4412/podliva-k-grechke-s-myasom_1685934730_12_max.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Гуляш из свинины с охотничьей подливкой и гречкой</h3>
+                                <p class="dish-description">Венгерская классика вместе с Русским бесмертным вкусом. Вкуснейший дует</p>
+                                <span class="dish-price">122 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://cdn.vkuso.ru/uploads/kurica-v-kislo-sladkom-souse-s-rassypchatym-risom.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Куриные наггетсы с рисом и кисло-сладким соусом</h3>
+                                <p class="dish-description">Дует из Америки и Азии. Вкус на кончиках пальцев</p>
+                                <span class="dish-price">145 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <!-- Блюда 19-24 -->
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://img1.russianfood.com/dycontent/images_upl/433/big_432706.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Филе горбуши под лимонно-укропным соусом с картофельным пюре</h3>
+                                <p class="dish-description">Горбуша под лимонным соусом с пюре, изыск на каждый день</p>
+                                <span class="dish-price">168 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://img.iamcook.ru/old/upl/recipes/cat/u-34982ddbd1b954755afbd5f7d7f9bec3.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Гречневая запеканка с грибами и овощами</h3>
+                                <p class="dish-description">Русская классика под новым видом. Стоит попробовать!</p>
+                                <span class="dish-price">136 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://e2.edimdoma.ru/data/recipes/0013/2299/132299-ed4_wide.jpg?1628767849?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Маффин</h3>
+                                <p class="dish-description">Классический маффин с шоколадом</p>
+                                <span class="dish-price">90 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://www.photorecept.ru/wp-content/uploads/2018/11/fruktovyj-jogurtovyj-tort-s-zhelatinom-bez-vypechki.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Пирожное Фрукты в желе</h3>
+                                <p class="dish-description">Бисквит, йогуртное суфле, желе и фрукты. Идеальный и легкий десерт</p>
+                                <span class="dish-price">80 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://eda.ru/images/RecipePhoto/390x390/venskie-vafli-s-yagodami_126424_photo_150750.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Вафли с мороженным</h3>
+                                <p class="dish-description">Две венские вафли и шарик мороженного с сиропом на выбор. Лучший друг в жаркую погоду!</p>
+                                <span class="dish-price">95 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+
+                        <div class="dish-card">
+                            <div class="dish-img" style="background-image: url('https://obed-gotov.ru/wp-content/uploads/2023/04/web-0405-1024x683-1.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="dish-info">
+                                <h3 class="dish-title">Пирожное Красный бархат</h3>
+                                <p class="dish-description">Роскошное пирожное для роскошных персон!</p>
+                                <span class="dish-price">70 руб.</span>
+                                <button class="btn add-to-cart">В корзину</button>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">О нашем кафе</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Кафе "Уголок" - это место, где каждый может почувствовать себя как дома. Мы готовим авторские блюда для вас с любовью, используя только свежие и качественные продукты.</p>
+                        <p>Наша кухня - это сочетание домашнего уюта и профессионального подхода.</p>
+                        <p>Доставка осуществляется в течение 60 минут по всему городу. Минимальный заказ - 600 рублей. При заказе от 1500 рублей - доставка бесплатно!</p>
+                        <p>Так же доступна доставка через наших партнеров! Таких как Яндекс. Еда и Купер</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://i.ibb.co/hxG0cL2J/image.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Интерьер кафе Уголок">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section class="contacts" id="contacts">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <div class="contact-info">
+                    <div class="contact-block">
+                        <h3>Адрес</h3>
+                        <p>г. Кострома, ул. Московская 101</p>
+                    </div>
+                    <div class="contact-block">
+                        <h3>Телефон</h3>
+                        <p><a href="tel:+78005553535">+7 (800) 555-35-35</a></p>
+                    </div>
+                    <div class="contact-block">
+                        <h3>Часы работы</h3>
+                        <p>Пн-Вс: 10:00 - 22:00</p>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1194.996705828539!2d40.871348104381724!3d57.746320858226824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1748983944948!5m2!1sru!2sru" 
+            allowfullscreen="" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Кафе "Уголок". Данный сайт разработан для защиты ВКР.</p>
+        </div>
+    </footer>
+
+    <!-- Корзина -->
+    <div class="cart-modal" id="cart">
+        <div class="cart-content">
+            <h3>Ваш заказ</h3>
+            <button class="close-cart">&times;</button>
+            <div class="cart-items"></div>
+            <div class="cart-total">
+                <span>Итого: </span>
+                <span class="total-price">0 руб.</span>
+            </div>
+            <button class="btn checkout-btn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Форма заказа -->
+    <div class="modal-overlay" id="order-modal">
+        <div class="modal-content">
+            <h3>Оформление заказа</h3>
+            <button class="close-modal">&times;</button>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="name">Имя *</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Адрес доставки *</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Комментарий к заказу</label>
+                    <textarea id="comment" rows="3" placeholder="Укажите удобное время доставки или другие пожелания"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="payment">Способ оплаты</label>
+                    <select id="payment">
+                        <option value="cash">Наличными курьеру</option>
+                        <option value="card">Картой онлайн</option>
+                        <option value="card-courier">Картой курьеру</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn submit-order">Подтвердить заказ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Подтверждение заказа -->
+    <div class="modal-overlay" id="confirmation-modal">
+        <div class="modal-content">
+            <h3>Спасибо за заказ!</h3>
+            <button class="close-modal">&times;</button>
+            <div class="confirmation-content">
+                <p>Ваш заказ успешно оформлен. Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+                <p>Номер вашего заказа: <strong>#<span id="order-number">12345</span></strong></p>
+                <p>Сумма заказа: <strong><span id="order-total">0</span> руб.</strong></p>
+                <div class="order-summary" style="margin-top: 20px; text-align: left;">
+                    <h4>Состав заказа:</h4>
+                    <div id="order-items" style="margin-top: 10px;"></div>
+                </div>
+                <button class="btn close-confirmation-btn" style="margin-top: 20px;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Слайдер
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Автопереключение слайдов каждые 5 секунд
+        setInterval(nextSlide, 5000);
+        
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на пункт
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Логика корзины
+        let cart = [];
+        const cartBtn = document.querySelector('.cart-btn');
+        const cartModal = document.getElementById('cart');
+        const cartItems = document.querySelector('.cart-items');
+        const cartCounter = document.querySelector('.cart-counter');
+        const totalPrice = document.querySelector('.total-price');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        const orderModal = document.getElementById('order-modal');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        
+        // Открытие/закрытие корзины
+        cartBtn.addEventListener('click', () => {
+            cartModal.classList.add('active');
+        });
+        
+        document.querySelector('.close-cart').addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+        
+        // Добавление в корзину
+        document.querySelectorAll('.add-to-cart, .promo-btn, .random-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                let item;
+                
+                if (this.classList.contains('add-to-cart')) {
+                    const dishCard = this.closest('.dish-card');
+                    item = {
+                        name: dishCard.querySelector('.dish-title').textContent,
+                        price: parseInt(dishCard.querySelector('.dish-price').textContent),
+                        quantity: 1
+                    };
+                } else if (this.classList.contains('random-btn')) {
+                    item = {
+                        name: "Набор Random",
+                        price: 1200,
+                        quantity: 1
+                    };
+                } else {
+                    const promoCard = this.closest('.promo-card');
+                    const promoName = promoCard.querySelector('h3').textContent;
+                    let promoPrice;
+                    
+                    if (promoName.includes('Комплексный')) {
+                        promoPrice = 499;
+                    } else if (promoName.includes('Семейный')) {
+                        promoPrice = 999;
+                    } else if (promoName.includes('Завтрак')) {
+                        promoPrice = 350;
+                    }
+                    
+                    item = {
+                        name: promoName,
+                        price: promoPrice,
+                        quantity: 1
+                    };
+                }
+                
+                const existingItem = cart.find(i => i.name === item.name);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push(item);
+                }
+                
+                updateCart();
+                
+                // Анимация добавления
+                this.textContent = 'Добавлено!';
+                setTimeout(() => {
+                    if (this.classList.contains('add-to-cart')) {
+                        this.textContent = 'В корзину';
+                    } else if (this.classList.contains('random-btn')) {
+                        this.textContent = 'Заказать набор';
+                    } else {
+                        this.textContent = 'Заказать';
+                    }
+                }, 1000);
+            });
+        });
+        
+        // Обновление корзины
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="quantity-controls">
+                        <button class="decrease">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <div class="cart-item-price">${item.price * item.quantity} руб.</div>
+                    <button class="remove-item">&times;</button>
+                `;
+                cartItems.appendChild(cartItem);
+                
+                // Обработчики для управления количеством
+                cartItem.querySelector('.increase').addEventListener('click', () => {
+                    item.quantity++;
+                    updateCart();
+                });
+                
+                cartItem.querySelector('.decrease').addEventListener('click', () => {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        cart = cart.filter(i => i.name !== item.name);
+                    }
+                    updateCart();
+                });
+                
+                cartItem.querySelector('.remove-item').addEventListener('click', () => {
+                    cart = cart.filter(i => i.name !== item.name);
+                    updateCart();
+                });
+            });
+            
+            totalPrice.textContent = `${total} руб.`;
+            cartCounter.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Показываем/скрываем кнопку оформления
+            checkoutBtn.style.display = cart.length > 0 ? 'block' : 'none';
+        }
+        
+        // Оформление заказа
+        checkoutBtn.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            orderModal.classList.add('active');
+        });
+        
+        // Отправка формы заказа
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Генерируем номер заказа
+            const orderNumber = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('order-number').textContent = orderNumber;
+            
+            // Заполняем информацию о заказе
+            document.getElementById('order-total').textContent = 
+                document.querySelector('.total-price').textContent;
+            
+            // Заполняем состав заказа
+            const orderItems = document.getElementById('order-items');
+            orderItems.innerHTML = '';
+            
+            cart.forEach(item => {
+                const orderItem = document.createElement('div');
+                orderItem.style.marginBottom = '5px';
+                orderItem.textContent = `${item.name} - ${item.quantity} x ${item.price} руб.`;
+                orderItems.appendChild(orderItem);
+            });
+            
+            // Показываем подтверждение
+            orderModal.classList.remove('active');
+            confirmationModal.classList.add('active');
+            
+            // Очищаем корзину
+            cart = [];
+            updateCart();
+            this.reset();
+        });
+        
+        // Закрытие модальных окон
+        document.querySelectorAll('.close-modal, .close-confirmation-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            });
+        });
+        
+        // Закрытие при клике вне модального окна
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // Закрытие при нажатии ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                cartModal.classList.remove('active');
+            }
+        });
+        
+        // Таймеры для акций
+        function updatePromoTimers() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Комплексный обед (12:00 - 16:00)
+            const lunchStart = 12;
+            const lunchEnd = 16;
+            
+            if (hours >= lunchStart && hours < lunchEnd) {
+                // Акция активна
+                document.getElementById('lunch-timer').style.display = 'block';
+                document.getElementById('lunch-unavailable').style.display = 'none';
+                document.getElementById('lunch-btn').disabled = false;
+                
+                // Вычисляем оставшееся время
+                const endTime = new Date();
+                endTime.setHours(lunchEnd, 0, 0, 0);
+                
+                const diff = endTime - now;
+                const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+                const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('lunch-timer').textContent = 
+                    `До конца акции: ${hoursLeft} ч ${minutesLeft} мин`;
+            } else {
+                // Акция не активна
+                document.getElementById('lunch-timer').style.display = 'none';
+                document.getElementById('lunch-unavailable').style.display = 'block';
+                document.getElementById('lunch-btn').disabled = true;
+            }
+            
+            // Семейный ужин (18:00 - 20:00)
+            const dinnerStart = 18;
+            const dinnerEnd = 20;
+            
+            if (hours >= dinnerStart && hours < dinnerEnd) {
+                // Акция активна
+                document.getElementById('dinner-timer').style.display = 'block';
+                document.getElementById('dinner-unavailable').style.display = 'none';
+                document.getElementById('dinner-btn').disabled = false;
+                
+                // Вычисляем оставшееся время
+                const endTime = new Date();
+                endTime.setHours(dinnerEnd, 0, 0, 0);
+                
+                const diff = endTime - now;
+                const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+                const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('dinner-timer').textContent = 
+                    `До конца акции: ${hoursLeft} ч ${minutesLeft} мин`;
+            } else {
+                // Акция не активна
+                document.getElementById('dinner-timer').style.display = 'none';
+                document.getElementById('dinner-unavailable').style.display = 'block';
+                document.getElementById('dinner-btn').disabled = true;
+            }
+            
+            // Завтрак (10:00 - 11:00)
+            const breakfastStart = 10;
+            const breakfastEnd = 11;
+            
+            if (hours >= breakfastStart && hours < breakfastEnd) {
+                // Акция активна
+                document.getElementById('breakfast-timer').style.display = 'block';
+                document.getElementById('breakfast-unavailable').style.display = 'none';
+                document.getElementById('breakfast-btn').disabled = false;
+                
+                // Вычисляем оставшееся время
+                const endTime = new Date();
+                endTime.setHours(breakfastEnd, 0, 0, 0);
+                
+                const diff = endTime - now;
+                const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
+                const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('breakfast-timer').textContent = 
+                    `До конца акции: ${hoursLeft} ч ${minutesLeft} мин`;
+            } else {
+                // Акция не активна
+                document.getElementById('breakfast-timer').style.display = 'none';
+                document.getElementById('breakfast-unavailable').style.display = 'block';
+                document.getElementById('breakfast-btn').disabled = true;
+            }
+        }
+        
+        // Обновляем таймеры каждую минуту
+        updatePromoTimers();
+        setInterval(updatePromoTimers, 60000);
+    </script>
+</body>
+</html>
